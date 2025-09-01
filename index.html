@@ -1,79 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lending Circle Limited — Financial Solutions</title>
+  <title>Lending Circle Limited — Financial solutions to move you forward</title>
+  <meta name="description" content="Lending Circle Limited is a licensed microcredit institution in Jamaica. Fast decisions, transparent pricing, and clear repayment terms." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0f172a; --text:#e5e7eb; --muted:#9ca3af; --brand:#00bf63; --ring:rgba(0,191,99,.35);
+      --bg:#0b0f1a;
+      --panel:#0f172a;
+      --text:#e8eef5;
+      --muted:#a7b8c9;
+      --brand:#00bf63;
+      --accent:#00bf63;
+      --ring: rgba(0,191,99,.35);
     }
+
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
-    a{color:var(--brand);text-decoration:none}
+    html,body{
+      margin:0;padding:0;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(0,191,99,.10), transparent 60%),
+        radial-gradient(900px 480px at 100% 0%, rgba(0,191,99,.06), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      line-height:1.6;
+    }
+    a{color:var(--accent);text-decoration:none;transition:.2s}
+    a:hover{opacity:.9}
     .container{max-width:1120px;margin:0 auto;padding:0 20px}
 
-    /* ===== HEADER (with mobile menu) ===== */
-    header{position:sticky;top:0;z-index:50;background:rgba(8,12,24,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:inline-flex;align-items:center;gap:10px;font-weight:700}
-    .brand img{height:38px;max-height:38px;width:auto;display:block} /* logo beside text, capped at 38px */
+    /* ===== HEADER (hamburger on left) ===== */
+    header{
+      position:sticky;top:0;z-index:50;
+      background:linear-gradient(180deg, rgba(8,12,24,.95), rgba(8,12,24,.82));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.06)
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;
+      position:relative;
+    }
+    /* Left group: hamburger + brand stay together */
+    .left-group{display:flex;align-items:center;gap:12px;min-width:0}
+
+    .brand{
+      display:flex;align-items:center;gap:10px;font-weight:700;white-space:nowrap;
+      line-height:1;
+    }
+    .brand img{
+      height:38px;max-height:38px;width:auto;display:block;vertical-align:middle
+    }
+    .brand span{display:inline-block;vertical-align:middle;line-height:1}
+
     .links{display:flex;align-items:center;gap:18px}
     .links a{color:var(--text);opacity:.95}
-    .cta{padding:10px 14px;border-radius:999px;background:linear-gradient(90deg,var(--brand),#00d978);color:#07160e;font-weight:700;box-shadow:0 10px 24px -12px var(--ring)}
 
-    /* Mobile hamburger */
-    .hamburger{display:none;background:transparent;border:0;color:#fff;padding:8px;border-radius:8px}
+    .btn{
+      display:inline-block;padding:12px 18px;border-radius:999px;
+      background:linear-gradient(90deg,var(--brand),#00d978);
+      color:#07160e;font-weight:700;letter-spacing:.3px;
+      box-shadow:0 12px 28px -12px var(--ring);transition:.25s
+    }
+    .btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 18px 40px -16px var(--ring)}
+    .btn-outline{background:transparent;color:var(--text);border:2px solid var(--brand);box-shadow:none}
+
+    /* Hamburger (left) */
+    .hamburger{
+      display:none;background:transparent;border:0;color:#fff;padding:8px;border-radius:8px
+    }
     .hamburger svg{width:26px;height:26px}
-    .mobile-menu{display:none;position:absolute;right:20px;top:56px;background:#0b1222;border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:0 14px 28px rgba(0,0,0,.35);padding:10px;min-width:200px}
+
+    .mobile-menu{
+      display:none;position:absolute;left:10px;top:56px;background:#0b1222;
+      border:1px solid rgba(255,255,255,.08);border-radius:12px;
+      box-shadow:0 14px 28px rgba(0,0,0,.35);padding:10px;min-width:230px
+    }
     .mobile-menu a{display:block;padding:10px 12px;color:#e5e7eb;border-radius:8px}
     .mobile-menu a:hover{background:rgba(255,255,255,.06)}
     .nav.open .mobile-menu{display:block}
 
-    /* ===== BANNER / SLIDER (square edges, very sleek dashes) ===== */
+    /* ===== BANNER / SLIDER (square edges; ultra-sleek dashes) ===== */
     .banner{position:relative;border-bottom:1px solid rgba(255,255,255,.06)}
     .slider{position:relative;max-width:1120px;margin:0 auto;overflow:hidden}
     .slides{display:flex;transition:transform .6s ease}
     .slide{min-width:100%;height:420px;position:relative}
     .slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.8)}
-    .caption{position:absolute;left:0;right:0;bottom:0;padding:18px 20px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.65));color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .cap-title{margin:0;font-weight:700}
+    .caption{
+      position:absolute;left:0;right:0;bottom:0;padding:18px 20px;
+      background:linear-gradient(180deg,transparent,rgba(0,0,0,.65));color:#fff;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
+    }
+    .cap-title{margin:0;font-weight:700;font-size:clamp(18px,2.2vw,24px)}
+    .cap-sub{opacity:.92;margin:0;font-size:clamp(14px,1.8vw,16px)}
 
     /* ultra-discreet dash indicators */
-    .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:5px}
-    .dot{width:14px;height:2px;border-radius:1px;background:rgba(255,255,255,.26);border:1px solid rgba(255,255,255,.2);cursor:pointer;transition:opacity .2s,transform .2s}
-    .dot.active{background:#fff;border-color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+    .dots{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:4px}
+    .dot{width:10px;height:2px;border-radius:1px;background:rgba(255,255,255,.26);border:1px solid rgba(255,255,255,.18);cursor:pointer;transition:opacity .2s,transform .2s}
+    .dot.active{background:#fff;border-color:#fff;box-shadow:0 1px 6px rgba(0,0,0,.25)}
 
-    /* ===== MAIN ===== */
-    h1{color:var(--brand);font-size:clamp(26px,4.2vw,40px);margin:20px 0 6px;text-align:center}
-    h2{color:var(--brand);font-size:clamp(18px,3vw,24px);margin:24px 0 8px;text-align:center}
-    p,li{max-width:820px;margin:0 auto}
+    /* ===== HERO ===== */
+    .hero{position:relative}
+    .hero-wrap{display:block;padding:56px 0 30px}
+    .hero h1{font-size:clamp(28px,4.2vw,44px);line-height:1.12;margin:8px 0 12px;color:#fff;text-align:center}
+    .hero p{color:var(--muted);font-size:clamp(15px,2vw,18px);margin:0 auto 18px;max-width:760px;text-align:center}
+    .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;justify-content:center}
 
-    /* FAQ (human, soft) */
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
+    .kpi{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;
+      box-shadow:0 4px 10px rgba(0,0,0,.2);text-align:center
+    }
+    .kpi b{font-size:clamp(18px,2.2vw,22px);display:block;margin-top:4px;color:#fff}
+    .kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+
+    /* ===== FEATURES / CARDS ===== */
+    .grid{display:grid;gap:18px}
+    .cards{grid-template-columns:repeat(3,1fr)}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);padding:20px;border-radius:18px;box-shadow:0 8px 18px rgba(0,0,0,.28);transition:.3s}
+    .card:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.36)}
+    .card h3{margin:0 0 6px;font-size:18px;color:var(--accent)}
+    .muted{color:var(--muted)}
+    .section{padding:54px 0}
+    .section h2{margin:0 0 16px;font-size:clamp(22px,3vw,28px);color:#fff;text-align:center}
+
+    /* ===== CALCULATOR ===== */
+    .calculator{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1100px;margin:0 auto}
+    .calculator label{display:block;margin:8px 0 6px}
+    .calculator input,.calculator select,.calculator textarea{
+      width:100%;background:#0b1222;color:#e5e7eb;border:1px solid rgba(255,255,255,.1);
+      border-radius:12px;padding:12px;outline:none;transition:.2s;font-size:clamp(14px,1.8vw,16px)
+    }
+    .calculator input:focus,.calculator select:focus,.calculator textarea:focus{border-color:#00bf63;box-shadow:0 0 0 4px rgba(0,191,99,.35)}
+    .calculator .result{background:#0b1222;border:1px dashed rgba(255,255,255,.22);border-radius:14px;padding:14px;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)}
+    .note{font-size:13px;margin-top:8px;text-align:center;color:#a7b8c9}
+
+    /* ===== FAQ ===== */
     .faq details{background:#111827;border:1px solid rgba(255,255,255,.08);margin:10px auto;max-width:820px;border-radius:12px;padding:12px 14px;box-shadow:0 4px 12px rgba(0,0,0,.22)}
     .faq summary{cursor:pointer;font-weight:700;color:var(--brand)}
     .faq p{color:#c9d4df;margin:8px 2px 2px}
 
-    /* FOOTER */
+    /* ===== FOOTER ===== */
     .footer{text-align:center;margin-top:42px;font-size:14px;color:var(--muted);padding:24px;border-top:1px solid rgba(255,255,255,.06)}
+    .footer a{color:var(--accent)}
 
-    /* Floating WhatsApp */
-    .floating-wa{position:fixed;right:16px;bottom:16px;background:#25D366;border-radius:999px;width:56px;height:56px;display:grid;place-items:center;box-shadow:0 10px 28px rgba(0,0,0,.35);z-index:60}
-    .floating-wa svg{width:30px;height:30px;display:block}
+    /* Floating WhatsApp (crisp vector icon via img) */
+    .floating-wa{
+      position:fixed;right:16px;bottom:16px;background:#25D366;border-radius:999px;width:60px;height:60px;
+      display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:60;transition:transform .2s ease, box-shadow .2s ease
+    }
+    .floating-wa:hover{transform:scale(1.05);box-shadow:0 14px 38px rgba(0,0,0,.4)}
+    .floating-wa img{width:30px;height:30px;display:block;image-rendering:optimizeQuality;shape-rendering:geometricPrecision}
 
     /* ===== RESPONSIVE ===== */
+    @media (max-width: 980px){
+      .cards{grid-template-columns:1fr}
+      .kpis{grid-template-columns:1fr}
+      .calculator{grid-template-columns:1fr}
+      .slide{height:360px}
+      .container{padding:0 16px}
+    }
     @media (max-width: 960px){
       .links{display:none}
       .hamburger{display:inline-grid}
-      .caption{padding:14px 12px}
-      .slide{height:360px}
     }
     @media (max-width: 540px){
       .slide{height:300px}
-      .cap-title{font-size:16px}
-      .dots{bottom:8px;gap:4px}
-      .dot{width:12px;height:2px}
+      .dots{bottom:6px;gap:4px}
+      .dot{width:10px;height:2px}
+      .floating-wa{right:12px;bottom:12px;width:56px;height:56px}
+      .floating-wa img{width:28px;height:28px}
     }
   </style>
 </head>
@@ -81,24 +183,33 @@
   <!-- ===== HEADER ===== -->
   <header>
     <div class="container nav" id="nav">
-      <a href="#home" class="brand">
-        <img src="/logo.png" alt="Lending Circle Limited logo" />
-        <span>Lending Circle Limited</span>
-      </a>
+      <!-- LEFT: hamburger + brand -->
+      <div class="left-group">
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <a href="#home" class="brand">
+          <img src="/logo.png" alt="Lending Circle Limited logo" />
+          <span>Lending Circle Limited</span>
+        </a>
+      </div>
+
+      <!-- RIGHT: desktop links -->
       <nav class="links" aria-label="Primary">
-        <a href="#home">Home</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#apply">Apply</a>
         <a href="#faq">FAQs</a>
         <a href="#contact">Contact</a>
-        <a href="#apply" class="cta">Apply Now</a>
+        <a href="#apply" class="btn">Apply Now</a>
       </nav>
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      </button>
+
+      <!-- Mobile dropdown (opens under the left group) -->
       <div class="mobile-menu" id="mobileMenu" role="menu" aria-label="Mobile Navigation">
-        <a href="#home" role="menuitem">Home</a>
+        <a href="#calculator" role="menuitem">Calculator</a>
+        <a href="#apply" role="menuitem">Apply</a>
         <a href="#faq" role="menuitem">FAQs</a>
         <a href="#contact" role="menuitem">Contact</a>
-        <a href="#apply" role="menuitem" class="cta" style="display:block;text-align:center;margin-top:6px">Apply Now</a>
+        <a href="#apply" role="menuitem" class="btn" style="display:block;text-align:center;margin-top:6px">Apply Now</a>
       </div>
     </div>
   </header>
@@ -109,62 +220,159 @@
       <div class="slides" id="slides">
         <div class="slide">
           <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop" alt="Fast approvals" />
-          <div class="caption container"><h3 class="cap-title">Fast approvals — often the same day</h3><a class="cta" href="#apply">Apply now</a></div>
+          <div class="caption container">
+            <h3 class="cap-title">Fast approvals — often the same day</h3>
+            <a class="btn" href="#apply">Apply now</a>
+          </div>
         </div>
         <div class="slide">
           <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1600&auto=format&fit=crop" alt="Transparent pricing" />
-          <div class="caption container"><h3 class="cap-title">Transparent pricing — no surprises</h3><a class="cta" href="#faq">See how it works</a></div>
+          <div class="caption container">
+            <h3 class="cap-title">Transparent pricing — no surprises</h3>
+            <a class="btn btn-outline" href="#calculator">Estimate repayments</a>
+          </div>
         </div>
         <div class="slide">
           <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1600&auto=format&fit=crop" alt="Flexible terms" />
-          <div class="caption container"><h3 class="cap-title">Flexible terms to fit your cash flow</h3><a class="cta" href="#apply">Start now</a></div>
+          <div class="caption container">
+            <h3 class="cap-title">Flexible terms to fit your cash flow</h3>
+            <a class="btn" href="#how-it-works">How it works</a>
+          </div>
         </div>
         <div class="slide">
           <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop" alt="Local support" />
-          <div class="caption container"><h3 class="cap-title">Local support when you need it</h3><a class="cta" href="https://wa.me/18764914462" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
+          <div class="caption container">
+            <h3 class="cap-title">Local support when you need it</h3>
+            <a class="btn btn-outline" href="https://wa.me/18764914462" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          </div>
         </div>
       </div>
       <div class="dots" id="dots" aria-hidden="true"></div>
     </div>
   </section>
 
-  <main>
-    <section class="container" style="padding:28px 0 10px">
-      <h1>Financial Solutions to Move You Forward</h1>
-      <p style="text-align:center;color:var(--muted);max-width:760px">Apply in minutes. Get a quick decision. We show your full cost upfront so there are no surprises.</p>
-    </section>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container hero-wrap">
+      <h1>Financial solutions to move you forward.</h1>
+      <p>Apply in minutes. Get a quick decision. We show your full cost upfront so there are no surprises.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="#apply">Start Application</a>
+        <a class="btn btn-outline" href="#calculator">Estimate repayments</a>
+      </div>
 
-    <!-- ===== FAQ (human) ===== -->
-    <h2 id="faq">FAQs</h2>
-    <div class="faq">
-      <details><summary>How fast can I get approved?</summary><p>Often the same day. If we have everything we need to verify your details, we move quickly. If anything is missing, we’ll let you know immediately so nothing slows you down.</p></details>
-      <details><summary>What will my payments look like?</summary><p>We’ll give you a simple schedule up front based on your chosen term. No jargon—just clear dates and amounts so you can plan easily.</p></details>
-      <details><summary>Are there hidden fees?</summary><p>No. You’ll always see the full cost before you commit. A small processing fee applies only to multi‑payment plans; we’ll flag it clearly when it’s relevant.</p></details>
-      <details><summary>What if I’m salaried monthly?</summary><p>Select a term that lines up with your salary date and we’ll structure things to fit. If you go beyond a single month, a one‑time processing fee may apply—we’ll let you know before you sign.</p></details>
+      <!-- KPIs -->
+      <div class="kpis" role="list">
+        <div class="kpi" role="listitem"><span class="label">Approval window</span><b>Same day</b></div>
+        <div class="kpi" role="listitem"><span class="label">Currency</span><b>JMD</b></div>
+        <div class="kpi" role="listitem"><span class="label">Max term</span><b>Up to 2 months</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="container section" id="features">
+    <h2>Why choose Lending Circle?</h2>
+    <div class="grid cards">
+      <div class="card"><h3>Transparent Pricing</h3><div class="muted">We show the total cost before you apply. No hidden fees, no surprises.</div></div>
+      <div class="card"><h3>Flexible Terms</h3><div class="muted">Choose 2–8 weeks. Interest scales by fortnight so you only pay for the time you use.</div></div>
+      <div class="card"><h3>Fast Decisions</h3><div class="muted">Same-day decisions are common once details are verified. We know time matters.</div></div>
+    </div>
+  </section>
+
+  <!-- ===== CALCULATOR (restored + mobile-ready) ===== -->
+  <section id="calculator" class="container section">
+    <h2>Loan calculator</h2>
+    <p class="muted" style="margin-top:0;text-align:center">Illustrative only. Final terms subject to assessment and approval.</p>
+    <div class="calculator" role="group" aria-labelledby="calc-heading">
+      <div>
+        <label for="amount">Loan amount (JMD)</label>
+        <input id="amount" inputmode="numeric" type="number" min="1000" step="500" placeholder="e.g. 50,000" />
+        <small class="muted">Minimum JMD 1,000</small>
+
+        <label for="weeks">Repayment period (weeks)</label>
+        <select id="weeks">
+          <option value="2">2 weeks (1 fortnight)</option>
+          <option value="4">4 weeks (2 fortnights)</option>
+          <option value="6">6 weeks (3 fortnights)</option>
+          <option value="8">8 weeks (4 fortnights)</option>
+        </select>
+
+        <label class="muted" style="display:flex;align-items:center;gap:8px;margin-top:10px">
+          <input id="monthly" type="checkbox" /> Salaried monthly
+        </label>
+
+        <button class="btn" style="margin-top:12px" onclick="calc()">Calculate</button>
+      </div>
+      <div class="result" id="result" aria-live="polite">
+        <b>Breakdown</b>
+        <div class="muted">Enter amount & select weeks, then press Calculate.</div>
+      </div>
     </div>
 
-    <section id="contact" class="container" style="padding:28px 0 10px">
-      <h2>Contact</h2>
-      <p style="text-align:center">Email <a href="mailto:support@lendingcirclejm.com">support@lendingcirclejm.com</a> • Call/WhatsApp <a href="tel:+18764914462">+876 491-4462</a></p>
-    </section>
-  </main>
+    <div class="note">
+      Pricing model: 35% for the first fortnight, +5% for each additional fortnight (max 4).<br>
+      Processing fee JMD 1,950 applies automatically on multi-payment terms. If <strong>Salaried monthly</strong> is selected, the fee applies when the term is longer than 4 weeks; otherwise, it applies when longer than 2 weeks. The fee is paid upfront and is not included in “Total to repay”.
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="container section" id="how-it-works">
+    <h2>How it works</h2>
+    <div class="grid cards">
+      <div class="card"><h3>1) Apply in minutes</h3><div class="muted">Use WhatsApp or the form. Tell us the amount and purpose.</div></div>
+      <div class="card"><h3>2) Fast verification</h3><div class="muted">We review your info and confirm eligibility and terms.</div></div>
+      <div class="card"><h3>3) Get funded</h3><div class="muted">Once accepted, receive funds and your repayment schedule.</div></div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq" class="container section faq">
+    <h2>FAQs</h2>
+    <details>
+      <summary>How fast can I get approved?</summary>
+      <p>Often the same day. If we have everything we need to verify your details, we move quickly. If anything is missing, we’ll let you know immediately so nothing slows you down.</p>
+    </details>
+    <details>
+      <summary>What will my payments look like?</summary>
+      <p>We’ll give you a simple schedule up front based on your chosen term. No jargon—just clear dates and amounts so you can plan easily.</p>
+    </details>
+    <details>
+      <summary>Are there hidden fees?</summary>
+      <p>No. You’ll always see the full cost before you commit. A small processing fee applies only to multi-payment plans; we’ll flag it clearly when it’s relevant.</p>
+    </details>
+    <details>
+      <summary>What if I’m salaried monthly?</summary>
+      <p>Select a term that lines up with your salary date and we’ll structure things to fit. If you go beyond a single month, a one-time JMD 1,950 fee may apply—we’ll let you know before you sign.</p>
+    </details>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="container section">
+    <h2>Contact</h2>
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px">
+      <div class="card"><b>Email</b><div class="muted"><a href="mailto:support@lendingcirclejm.com">support@lendingcirclejm.com</a></div></div>
+      <div class="card"><b>Phone / WhatsApp</b><div class="muted"><a href="tel:+18764914462">+876 491-4462</a></div></div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="container">
-      © <span id="year"></span> Lending Circle Limited. All rights reserved. <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a>
+      © <span id="year"></span> Lending Circle Limited. All rights reserved.
+      • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a>
     </div>
   </footer>
 
-  <!-- Floating WhatsApp (clean SVG icon) -->
-  <a class="floating-wa" href="https://wa.me/18764914462?text=Hi%20Lending%20Circle%2C%20I%27d%20like%20to%20apply." target="_blank" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M19.11 17.59c-.27-.14-1.59-.79-1.84-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.16-1.35-.8-.7-1.34-1.56-1.5-1.83-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.46-.16 0-.34-.02-.52-.02s-.48.07-.73.34c-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.83.14.18 1.93 2.94 4.68 4.12.65.28 1.16.45 1.55.57.65.21 1.23.18 1.69.11.52-.08 1.59-.65 1.81-1.27.22-.62.22-1.15.16-1.27-.07-.12-.25-.2-.52-.34z" fill="#FFF"/><path d="M26.7 5.3A12.5 12.5 0 0 0 16 1.5C8.99 1.5 3.3 7.19 3.3 14.2c0 2.27.62 4.48 1.8 6.4L3 28.7l8.29-2.05c1.84 1 3.92 1.53 6.03 1.53 7.01 0 12.7-5.69 12.7-12.7 0-3.39-1.32-6.58-3.32-8.98zM17.32 26.5c-1.9 0-3.77-.5-5.4-1.42l-.39-.22-4.91 1.21 1.31-4.78-.25-.39a10.87 10.87 0 0 1-1.67-5.7C6.01 8.8 10.5 4.3 16 4.3c2.88 0 5.58 1.12  7.61 3.15a10.71 10.71 0 0 1 3.15 7.6c0 5.49-4.49 9.99-9.99 9.99z" fill="#FFF"/></svg>
+  <!-- Floating WhatsApp (crisp vector via Simple Icons) -->
+  <a class="floating-wa" href="https://wa.me/18764914462?text=Hi%20Lending%20Circle%2C%20I%27m%20ready%20to%20apply." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+    <img src="https://cdn.simpleicons.org/whatsapp/FFFFFF" alt="WhatsApp" loading="lazy" decoding="async" />
   </a>
 
   <script>
     // Year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile menu toggle
+    // Mobile menu toggle (hamburger on left)
     const nav = document.getElementById('nav');
     const hamb = document.getElementById('hamburger');
     const menu = document.getElementById('mobileMenu');
@@ -174,16 +382,52 @@
     });
     menu.addEventListener('click', (e)=>{ if(e.target.tagName==='A'){ nav.classList.remove('open'); hamb.setAttribute('aria-expanded','false'); } });
 
-    // Slider logic (dash indicators)
+    // Slider logic (ultra-sleek dash indicators)
     const slidesEl = document.getElementById('slides');
     const dotsWrap = document.getElementById('dots');
     const total = slidesEl.children.length; let index = 0, timer;
     function go(i){ index=(i+total)%total; slidesEl.style.transform=`translateX(-${index*100}%)`; [...dotsWrap.children].forEach((d,di)=>d.classList.toggle('active', di===index)); restart(); }
-    function restart(){ clearInterval(timer); timer=setInterval(()=>go(index+1), 5500); }
+    function restart(){ clearInterval(timer); timer=setInterval(()=> go(index+1), 5500); }
     for(let i=0;i<total;i++){ const dot=document.createElement('div'); dot.className='dot'+(i===0?' active':''); dot.addEventListener('click', ()=>go(i)); dotsWrap.appendChild(dot); }
     // touch swipe
-    let startX=null; slidesEl.addEventListener('touchstart',(e)=> startX=e.touches[0].clientX,{passive:true}); slidesEl.addEventListener('touchmove',(e)=>{ if(startX===null) return; const dx=e.touches[0].clientX-startX; if(Math.abs(dx)>60){ go(index+(dx<0?1:-1)); startX=null; } },{passive:true});
+    let startX=null;
+    slidesEl.addEventListener('touchstart',(e)=> startX=e.touches[0].clientX,{passive:true});
+    slidesEl.addEventListener('touchmove',(e)=>{ if(startX===null) return; const dx=e.touches[0].clientX-startX; if(Math.abs(dx)>60){ go(index+(dx<0?1:-1)); startX=null; } },{passive:true});
     restart();
+
+    // Calculator
+    const fmt = (n) => new Intl.NumberFormat('en-JM', { style: 'currency', currency: 'JMD', maximumFractionDigits: 0 }).format(n);
+    function calc(){
+      const amt = parseFloat(document.getElementById('amount').value || 0);
+      const weeks = parseInt(document.getElementById('weeks').value || 0, 10);
+      const salariedMonthly = document.getElementById('monthly').checked;
+      const res = document.getElementById('result');
+
+      if(!amt || !weeks){
+        res.innerHTML = '<b>Breakdown</b><div class="muted">Please enter amount and weeks.</div>';
+        return;
+      }
+      const fortnights = Math.min(4, Math.max(1, Math.ceil(weeks/2)));
+      const rate = 0.35 + (fortnights - 1) * 0.05;
+      const interest = Math.round(amt * rate);
+      const totalRepay = amt + interest;
+      const feeThreshold = salariedMonthly ? 4 : 2;
+      const fee = weeks > feeThreshold ? 1950 : 0;
+
+      res.innerHTML = `
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
+          <div><div class="muted">Principal</div><b>${fmt(amt)}</b></div>
+          <div><div class="muted">Repayment period</div><b>${weeks} weeks (${fortnights} fortnight${fortnights>1?'s':''})</b></div>
+          <div><div class="muted">Interest rate</div><b>${Math.round(rate*100)}%</b></div>
+          <div><div class="muted">Interest amount</div><b>${fmt(interest)}</b></div>
+          <div><div class="muted">Total to repay</div><b>${fmt(totalRepay)}</b></div>
+          <div><div class="muted">Processing fee (upfront)</div><b>${fee?fmt(fee):'—'}</b></div>
+        </div>
+        <div class="muted" style="margin-top:8px;font-size:13px">
+          ${fee ? 'A one-time processing fee applies and is paid upfront.' : 'No processing fee based on the selected term.'}
+        </div>
+      `;
+    }
   </script>
 </body>
 </html>
