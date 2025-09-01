@@ -33,12 +33,19 @@
     .container{max-width:1100px;margin:0 auto;padding:0 20px}
     header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(15,23,42,.95), rgba(15,23,42,.85));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,.06)}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .logo{font-weight:700;font-size:18px;color:var(--text)}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--text)}
+    .logo img{height:36px;width:auto;display:block}
     .nav a{margin-left:18px;color:var(--text);opacity:.9}
     .nav a.btn{margin-left:24px}
     .btn{display:inline-block;padding:12px 16px;border-radius:12px;background:var(--brand);color:#041316;font-weight:700;box-shadow:0 8px 24px -8px var(--ring);transition:.2s;letter-spacing:.2px}
     .btn:hover{transform:translateY(-1px);box-shadow:0 14px 34px -10px var(--ring);text-decoration:none}
     .btn-outline{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.2)}
+
+    .banner{position:relative;min-height:280px;background:#0b1222 url('/banner.jpg') center/cover no-repeat;border-bottom:1px solid rgba(255,255,255,.06)}
+    .banner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.35))}
+    .banner-inner{position:relative;z-index:1;padding:60px 0;color:#fff}
+    .banner h1{margin:0;padding:0;font-size:40px}
+    .banner p{font-size:18px;color:#e5e7eb}
 
     .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;padding:40px 0 20px}
     .hero h1{font-size:38px;line-height:1.15;margin:8px 0 10px}
@@ -91,6 +98,7 @@
     "name": "Lending Circle Limited",
     "areaServed": "Jamaica",
     "url": "https://your-domain.example/",
+    "logo": "/logo.png",
     "telephone": "+876 491-4462",
     "currenciesAccepted": "JMD",
     "openingHours": "Mo-Fr 09:00-17:00",
@@ -101,7 +109,7 @@
 <body>
   <header>
     <div class="container nav">
-      <div class="logo">Lending Circle Limited</div>
+      <div class="logo"><img src="/logo.png" alt="Lending Circle Logo"><span>Lending Circle Limited</span></div>
       <nav class="hide-sm">
         <a href="#calculator">Calculator</a>
         <a href="#apply">Apply</a>
@@ -111,6 +119,14 @@
       </nav>
     </div>
   </header>
+
+  <!-- Banner image section -->
+  <section class="banner">
+    <div class="container banner-inner">
+      <h1>Empowering fast, fair microloans</h1>
+      <p>Transparent terms • Quick approvals • Licensed in Jamaica</p>
+    </div>
+  </section>
 
   <main>
     <!-- Content unchanged -->
@@ -126,7 +142,7 @@
   <footer class="footer">
     <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
       <div>© <span id="year"></span> Lending Circle Limited. All rights reserved.</div>
-      <div class="muted">Call <a href="tel:+18764914462">+876 491-4462</a> • Email <a href="mailto:support@lendingcirclejm.com">support@lendingcirclejm.com</a> • Privacy • Terms • Responsible Lending</div>
+      <div class="muted">Call <a href="tel:+18764914462">+876 491-4462</a> • Email <a href="mailto:support@lendingcirclejm.com">support@lendingcirclejm.com</a> • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/responsible-lending.html">Responsible Lending</a></div>
     </div>
   </footer>
 
