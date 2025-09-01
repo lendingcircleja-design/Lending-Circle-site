@@ -20,9 +20,9 @@
       --panel:#0f172a;         /* card background */
       --panel-2:#0c1324;       /* alt card */
       --text:#e8eef5;          /* text */
-      --muted:#9fb3c8;         /* secondary text */
+      --muted:#a7b8c9;         /* secondary text */
       --brand:#00bf63;         /* company green */
-      --accent:#00bf63;        /* unify accent to brand */
+      --accent:#00bf63;        /* same as brand */
       --ring: rgba(0,191,99,.35);
       --ok:#14e39a;
       --danger:#ef4444;
@@ -44,18 +44,17 @@
     a:hover{opacity:.9}
     .container{max-width:1120px;margin:0 auto;padding:0 20px}
 
-    /* Header */
+    /* Header (banner/top bar) */
     header{
       position:sticky;top:0;z-index:40;
       background:linear-gradient(180deg, rgba(7,11,22,.95), rgba(7,11,22,.78));
       backdrop-filter: blur(10px);
       border-bottom:1px solid rgba(255,255,255,.06)
     }
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
     .logo{display:flex;align-items:center;gap:12px;font-weight:700}
     .logo img{
-      height:40px;max-height:40px;width:auto;display:block;
-      filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))
+      height:38px;max-height:38px;width:auto;display:block; /* cap banner (header/logo) at 38px */
     }
     .nav a{margin-left:18px;color:var(--text);opacity:.95}
     .nav a.btn{margin-left:24px}
@@ -74,12 +73,12 @@
       border:2px solid var(--brand);box-shadow:none
     }
 
-    /* Banner Slider (taller) */
+    /* Banner Slider (no rounded edges) */
     .banner{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border-bottom:1px solid rgba(255,255,255,.06)}
-    .slider{position:relative;max-width:1120px;margin:0 auto;overflow:hidden;border-radius:24px}
+    .slider{position:relative;max-width:1120px;margin:0 auto;overflow:hidden} /* no border-radius */
     .slides{display:flex;transition:transform .6s ease}
-    .slide{position:relative;min-width:100%;height:440px} /* increased height */
-    .slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.78)}
+    .slide{position:relative;min-width:100%;height:460px}
+    .slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.78)} /* square corners */
     .slide .caption{
       position:absolute;left:0;right:0;bottom:0;padding:20px;
       display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;
@@ -87,17 +86,23 @@
       color:#fff
     }
     .cap-text{max-width:760px}
-    .cap-title{font-weight:700;font-size:22px;margin:0 0 4px}
-    .cap-sub{opacity:.92;margin:0}
-    .dots{position:absolute;left:0;right:0;bottom:14px;display:flex;gap:8px;justify-content:center}
-    .dot{width:9px;height:9px;border-radius:99px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7);cursor:pointer}
-    .dot.active{background:#fff}
+    .cap-title{font-weight:700;font-size:clamp(18px,2.2vw,24px);margin:0 0 4px}
+    .cap-sub{opacity:.92;margin:0;font-size:clamp(14px,1.8vw,16px)}
 
-    /* Hero (single column, removed placeholder art) */
+    /* Sleek dash indicators */
+    .dots{position:absolute;left:0;right:0;bottom:16px;display:flex;gap:10px;justify-content:center}
+    .dot{
+      width:26px;height:4px;border-radius:2px;
+      background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.65);
+      cursor:pointer;transition:.2s
+    }
+    .dot.active{background:#fff;border-color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+
+    /* Hero (single column, clean) */
     .hero{position:relative;overflow:hidden}
-    .hero-wrap{display:block;padding:54px 0 30px}
-    .hero h1{font-size:44px;line-height:1.12;margin:8px 0 12px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.4)}
-    .hero p{color:var(--muted);font-size:18px;margin:0 0 18px;max-width:760px}
+    .hero-wrap{display:block;padding:56px 0 30px}
+    .hero h1{font-size:clamp(28px,4.2vw,44px);line-height:1.12;margin:8px 0 12px;color:#fff}
+    .hero p{color:var(--muted);font-size:clamp(15px,2vw,18px);margin:0 0 18px;max-width:760px}
     .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
 
     /* KPI & Cards */
@@ -107,8 +112,8 @@
       border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;
       box-shadow:0 4px 10px rgba(0,0,0,.2);text-align:center
     }
-    .kpi b{font-size:22px;display:block;margin-top:4px;color:#fff}
-    .kpi .label{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px}
+    .kpi b{font-size:clamp(18px,2.2vw,22px);display:block;margin-top:4px;color:#fff}
+    .kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
 
     .grid{display:grid;gap:18px}
     .cards{grid-template-columns:repeat(3,1fr)}
@@ -118,14 +123,15 @@
     .muted{color:var(--muted)}
 
     .section{padding:54px 0}
-    .section h2{margin:0 0 16px;font-size:28px;color:#fff;text-align:center;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+    .section h2{margin:0 0 16px;font-size:clamp(22px,3vw,28px);color:#fff;text-align:center}
 
     /* Calculator & Form */
     .calculator{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     label{display:block;margin:8px 0 6px}
     input, select, textarea{
       width:100%;background:#0b1222;color:var(--text);
-      border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;outline:none;transition:.2s
+      border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;outline:none;transition:.2s;
+      font-size:clamp(14px,1.8vw,16px)
     }
     input:focus, select:focus, textarea:focus{border-color:var(--brand);box-shadow:0 0 0 4px var(--ring)}
     .result{background:#0b1222;border:1px dashed rgba(255,255,255,.22);border-radius:14px;padding:14px;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)}
@@ -142,6 +148,7 @@
     /* FAQ */
     .faq details{background:var(--panel);border:1px solid rgba(255,255,255,.1);margin:10px 0;border-radius:14px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
     .faq summary{cursor:pointer;font-weight:600;color:var(--accent)}
+    .faq p{margin:8px 0 0}
 
     /* Footer */
     .footer{
@@ -154,21 +161,28 @@
     .footer a{color:var(--accent)}
     .footer a:hover{opacity:.85}
 
-    /* Floating WhatsApp */
+    /* Floating WhatsApp (official mark SVG) */
     .floating-wa{
-      position:fixed;right:16px;bottom:16px;background:#25D366;color:#fff;border-radius:999px;padding:14px;
-      display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;
-      box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:50;transition:.3s
+      position:fixed;right:16px;bottom:16px;background:#25D366;border:0;
+      color:#fff;border-radius:999px;padding:0;
+      display:inline-grid;place-items:center;width:60px;height:60px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:50;transition:transform .2s ease, box-shadow .2s ease
     }
-    .floating-wa:hover{transform:scale(1.06)}
-    .floating-wa svg{width:28px;height:28px;display:block}
+    .floating-wa:hover{transform:scale(1.05);box-shadow:0 14px 38px rgba(0,0,0,.4)}
+    .floating-wa svg{width:32px;height:32px;display:block}
 
     @media (max-width: 980px){
       .calculator{grid-template-columns:1fr}
       .cards,.steps,.kpis,.testimonials{grid-template-columns:1fr}
       .nav .hide-sm{display:none}
       .logo img{height:34px;max-height:34px}
-      .slide{height:300px} /* mobile banner height */
+      .slide{height:360px}
+      .nav{padding:10px 0}
+      .container{padding:0 16px}
+    }
+    @media (max-width: 520px){
+      .slide{height:300px}
+      .floating-wa{right:12px;bottom:12px;width:56px;height:56px}
     }
   </style>
 
@@ -193,7 +207,7 @@
   <header>
     <div class="container nav">
       <div class="logo.png">
-        <img src="/logo.png" alt="Lending Circle Limited logo" height="40" style="height:40px;max-height:40px;width:auto;display:block;">
+        <img src="/logo.png" alt="Lending Circle Limited logo" height="38" style="height:38px;max-height:38px;width:auto;display:block;">
         Lending Circle Limited
       </div>
       <nav class="hide-sm" aria-label="Primary">
@@ -206,10 +220,11 @@
     </div>
   </header>
 
-  <!-- Banner Slider (dots only; replace images later if you like) -->
+  <!-- Banner Slider (square edges; dash indicators) -->
   <section class="banner" aria-label="Highlights">
     <div class="slider" id="slider" tabindex="0">
       <div class="slides" id="slides">
+        <!-- Replace image src with /banner-1.jpg ... /banner-4.jpg after uploading -->
         <article class="slide" role="group" aria-roledescription="slide" aria-label="Fast approvals">
           <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop" alt="Happy customer celebrating loan approval">
           <div class="caption">
@@ -259,7 +274,7 @@
   </section>
 
   <main>
-    <!-- HERO (no extra tagline, no placeholder art) -->
+    <!-- HERO -->
     <section class="hero">
       <div class="container hero-wrap">
         <h1>Financial solutions to move you forward.</h1>
@@ -306,6 +321,10 @@
             <option value="8">8 weeks (4 fortnights)</option>
           </select>
 
+          <label class="muted" style="display:flex;align-items:center;gap:8px;margin-top:10px">
+            <input id="monthly" type="checkbox" /> Salaried monthly
+          </label>
+
           <button class="btn" style="margin-top:12px" onclick="calc()">Calculate</button>
         </div>
 
@@ -317,7 +336,7 @@
 
       <div class="muted note">
         Pricing model: 35% for the first fortnight, +5% for each additional fortnight (max 4).<br>
-        Processing fee JMD 1,950 applies automatically on multi-payment terms (more than 2 weeks) and is paid upfront (excluded from total repayment shown).
+        Processing fee JMD 1,950 applies automatically on multi-payment terms. If <strong>Salaried monthly</strong> is selected, the fee applies when the term is longer than 4 weeks; otherwise, it applies when longer than 2 weeks. The fee is paid upfront and is not included in “Total to repay”.
       </div>
     </section>
 
@@ -346,46 +365,29 @@
       </div>
     </section>
 
-    <!-- APPLY -->
-    <section id="apply" class="container section">
-      <h2>Start your application</h2>
-      <p class="muted" style="text-align:center">We’ll contact you shortly after you submit.</p>
-
-      <form name="loan-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="loanForm" style="max-width:820px;margin:0 auto">
-        <input type="hidden" name="form-name" value="loan-interest">
-        <p style="display:none"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
-
-        <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
-          <div><label for="name">Full name</label><input id="name" name="name" required placeholder="Your name" autocomplete="name" /></div>
-          <div><label for="phone">Phone (WhatsApp preferred)</label><input id="phone" name="phone" required placeholder="876-491-4462" autocomplete="tel" /></div>
-          <div><label for="email">Email (optional)</label><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" /></div>
-          <div><label for="requested_amount">Amount requested (JMD)</label><input id="requested_amount" name="requested_amount" type="number" min="1000" step="500" required /></div>
-        </div>
-
-        <label for="purpose">Purpose</label>
-        <textarea id="purpose" name="purpose" rows="4" placeholder="Tell us briefly how you’ll use the funds"></textarea>
-
-        <label class="muted" style="display:flex;gap:8px;align-items:center;margin-top:8px">
-          <input type="checkbox" name="consent" required /> I agree to be contacted about my application and understand that approval is subject to assessment.
-        </label>
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px">
-          <button class="btn" type="submit">Submit</button>
-          <a class="btn btn-outline" href="https://wa.me/18764914462?text=Hi%20Lending%20Circle%2C%20I%27d%20like%20to%20apply%20for%20a%20loan." target="_blank" rel="noopener">Chat on WhatsApp</a>
-          <a class="btn btn-outline" href="tel:+18764914462">Call us</a>
-        </div>
-
-        <div id="formMsg" class="muted" style="margin-top:8px;text-align:center" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <!-- FAQ -->
+    <!-- FAQ (more human responses) -->
     <section id="faq" class="container section faq">
       <h2>FAQs</h2>
-      <details><summary>What are the interest terms?</summary><div class="muted">35% for the first fortnight, then +5% per additional fortnight, up to 4 fortnights (2 months). Processing fee JMD 1,950 applies automatically to terms longer than 2 weeks and is paid upfront.</div></details>
-      <details><summary>How fast is approval?</summary><div class="muted">Often same day once we receive required details. Timing can vary based on verification needs.</div></details>
-      <details><summary>How do repayments work?</summary><div class="muted">We provide a schedule aligned to your selected term. You can repay early; contact us to settle without penalty.</div></details>
-      <details><summary>Are you licensed?</summary><div class="muted">Yes — we operate as a licensed microcredit institution in Jamaica.</div></details>
+      <details>
+        <summary>What are the interest terms?</summary>
+        <p>We keep it simple: 35% for the first fortnight, then 5% more for each additional fortnight—capped at 2 months. Before you commit, we show the full cost so there are no surprises.</p>
+      </details>
+      <details>
+        <summary>How fast can I be approved?</summary>
+        <p>Often the same day. If we have everything we need to verify your details, we move quickly. If anything is missing, we’ll tell you exactly what’s needed to keep things moving.</p>
+      </details>
+      <details>
+        <summary>Do I have to pay a processing fee?</summary>
+        <p>Only if your plan has multiple payments. If you’re paid monthly and pick 4 weeks, there’s usually no fee. Go beyond that (or beyond 2 weeks if not salaried monthly), and a one-time JMD 1,950 fee applies upfront.</p>
+      </details>
+      <details>
+        <summary>Can I repay early?</summary>
+        <p>Yes. If you want to settle before the end of your term, just let us know. We’ll give you the early-settlement amount—no penalty for paying off early.</p>
+      </details>
+      <details>
+        <summary>Are you licensed?</summary>
+        <p>Yes—we operate as a licensed microcredit institution in Jamaica. It’s important to us that you feel safe and informed at every step.</p>
+      </details>
     </section>
 
     <!-- CONTACT -->
@@ -416,16 +418,17 @@
     </div>
   </footer>
 
-  <!-- Floating WhatsApp button -->
+  <!-- Floating WhatsApp button (official mark, crisp) -->
   <a class="floating-wa" href="https://wa.me/18764914462?text=Hi%20Lending%20Circle%2C%20I%27m%20ready%20to%20apply." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Official-looking WhatsApp glyph (vector) -->
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
       <path d="M19.11 17.59c-.27-.14-1.59-.79-1.84-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.16-1.35-.8-.7-1.34-1.56-1.5-1.83-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.46-.16 0-.34-.02-.52-.02s-.48.07-.73.34c-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.83.14.18 1.93 2.94 4.68 4.12.65.28 1.16.45 1.55.57.65.21 1.23.18 1.69.11.52-.08 1.59-.65 1.81-1.27.22-.62.22-1.15.16-1.27-.07-.12-.25-.2-.52-.34z" fill="#FFF"/>
-      <path d="M26.7 5.3A12.5 12.5 0 0 0 16 1.5C8.99 1.5 3.3 7.19 3.3 14.2c0 2.27.62 4.48 1.8 6.4L3 28.7l8.29-2.05c1.84 1 3.92 1.53 6.03 1.53 7.01 0 12.7-5.69 12.7-12.7 0-3.39-1.32-6.58-3.32-8.98zM17.32 26.5c-1.9 0-3.77-.5-5.4-1.42l-.39-.22-4.91 1.21 1.31-4.78-.25-.39a10.87 10.87 0 0 1-1.67-5.7C6.01 8.8 10.5 4.3 16 4.3c2.88 0 5.58 1.12 7.61 3.15a10.71 10.71 0 0 1 3.15 7.6c0 5.49-4.49 9.99-9.99 9.99z" fill="#FFF"/>
+      <path d="M26.7 5.3A12.5 12.5 0 0 0 16 1.5C8.99 1.5 3.3 7.19 3.3 14.2c0 2.27.62 4.48 1.8 6.4L3 28.7l8.29-2.05c1.84 1 3.92 1.53 6.03 1.53 7.01 0 12.7-5.69 12.7-12.7 0-3.39-1.32-6.58-3.32-8.98zM17.32 26.5c-1.9 0-3.77-.5-5.4-1.42l-.39-.22-4.91 1.21 1.31-4.78-.25-.39a10.87 10.87 0 0 1-1.67-5.7C6.01 8.8 10.5 4.3 16 4.3c2.88 0 5.58 1.12  7.61 3.15a10.71 10.71 0 0 1 3.15 7.6c0 5.49-4.49 9.99-9.99 9.99z" fill="#FFF"/>
     </svg>
   </a>
 
   <script>
-    // ===== Banner slider (dots only) =====
+    // ===== Banner slider (dash indicators) =====
     const slides = document.getElementById('slides');
     const dotsWrap = document.getElementById('dots');
     const total = slides.children.length;
@@ -442,7 +445,7 @@
       timer = setInterval(()=> go(index+1), 5500);
     }
 
-    // Build dots
+    // Build dash indicators
     for(let i=0;i<total;i++){
       const dot = document.createElement('div');
       dot.className = 'dot' + (i===0?' active':'');
@@ -467,6 +470,7 @@
     function calc(){
       const amt = parseFloat(document.getElementById('amount').value || 0);
       const weeks = parseInt(document.getElementById('weeks').value || 0, 10);
+      const salariedMonthly = document.getElementById('monthly').checked;
       const res = document.getElementById('result');
 
       if(!amt || !weeks){
@@ -477,7 +481,12 @@
       const rate = 0.35 + (fortnights - 1) * 0.05; // 35% + 5% per extra fortnight
       const interest = Math.round(amt * rate);
       const totalRepay = amt + interest;
-      const fee = weeks > 2 ? 1950 : 0; // auto-apply multi-payment fee for terms > 2 weeks
+
+      // Fee logic:
+      // - default (not salaried monthly): fee if weeks > 2
+      // - salaried monthly: fee if weeks > 4
+      const feeThreshold = salariedMonthly ? 4 : 2;
+      const fee = weeks > feeThreshold ? 1950 : 0;
 
       res.innerHTML = `
         <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
@@ -489,7 +498,7 @@
           <div><div class="muted">Processing fee (upfront)</div><b>${fee?fmt(fee):'—'}</b></div>
         </div>
         <div class="muted" style="margin-top:8px;font-size:13px">
-          Note: The processing fee is paid upfront on multi-payment loans (terms longer than 2 weeks) and is not part of the total to repay shown.
+          ${fee ? 'A one-time processing fee applies and is paid upfront.' : 'No processing fee based on the selected term.'}
         </div>
       `;
     }
@@ -497,14 +506,16 @@
     // Netlify AJAX form submit
     function encode(data){ return Object.keys(data).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k])).join('&'); }
     const form = document.getElementById('loanForm');
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      const formMsg = document.getElementById('formMsg');
-      const data = Object.fromEntries(new FormData(form).entries());
-      fetch('/', { method:'POST', headers:{ 'Content-Type':'application/x-www-form-urlencoded' }, body: encode({ 'form-name': form.getAttribute('name'), ...data })})
-      .then(() => { form.reset(); formMsg.textContent = "Thanks! We'll be in touch shortly."; formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--ok'); })
-      .catch((err) => { formMsg.textContent = 'Something went wrong. Please WhatsApp or call us.'; formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger'); console.error(err); });
-    });
+    if(form){
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const formMsg = document.getElementById('formMsg');
+        const data = Object.fromEntries(new FormData(form).entries());
+        fetch('/', { method:'POST', headers:{ 'Content-Type':'application/x-www-form-urlencoded' }, body: encode({ 'form-name': form.getAttribute('name'), ...data })})
+        .then(() => { form.reset(); formMsg.textContent = "Thanks! We'll be in touch shortly."; formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--ok'); })
+        .catch((err) => { formMsg.textContent = 'Something went wrong. Please WhatsApp or call us.'; formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger'); console.error(err); });
+      });
+    }
 
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
