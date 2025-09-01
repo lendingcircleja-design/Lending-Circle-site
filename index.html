@@ -16,38 +16,67 @@
 
   <style>
     :root{
-      --bg:#0f172a; --panel:#0b1222; --panel-2:#111827; --text:#e5e7eb; --muted:#9ca3af;
-      --brand:#14b8a6; --accent:#22d3ee; --ring: rgba(20,184,166,0.4);
-      --ok:#10b981; --danger:#ef4444;
+      --bg:#0b0f1a;            /* deep slate */
+      --panel:#0f172a;         /* card background */
+      --panel-2:#0c1324;       /* alt card */
+      --text:#e8eef5;          /* text */
+      --muted:#9fb3c8;         /* secondary text */
+      --brand:#00bf63;         /* your company green */
+      --accent:#00bf63;        /* unify accent to brand */
+      --ring: rgba(0,191,99,.35);
+      --ok:#14e39a;
+      --danger:#ef4444;
     }
+
     *{box-sizing:border-box}
     html,body{
-      margin:0;padding:0;background:
-      radial-gradient(1200px 600px at 10% -10%, rgba(20,184,166,.08), transparent 60%),
-      radial-gradient(1000px 500px at 100% 10%, rgba(34,211,238,.06), transparent 60%),
-      var(--bg);
-      color:var(--text);font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6
+      margin:0;padding:0;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(0,191,99,.10), transparent 60%),
+        radial-gradient(900px 480px at 100% 0%, rgba(0,191,99,.06), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;moz-osx-font-smoothing:grayscale;
     }
     a{color:var(--accent);text-decoration:none;transition:.2s}
-    a:hover{color:var(--brand)}
+    a:hover{opacity:.9}
     .container{max-width:1120px;margin:0 auto;padding:0 20px}
 
     /* Header */
-    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(6,12,23,.95), rgba(6,12,23,.70));backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    header{
+      position:sticky;top:0;z-index:40;
+      background:linear-gradient(180deg, rgba(7,11,22,.95), rgba(7,11,22,.78));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.06)
+    }
     .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
     .logo{display:flex;align-items:center;gap:12px;font-weight:700}
-    .logo img{max-height:40px;width:auto;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+    .logo img{
+      height:40px;max-height:40px;width:auto;display:block;
+      filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))
+    }
     .nav a{margin-left:18px;color:var(--text);opacity:.95}
     .nav a.btn{margin-left:24px}
 
     /* Buttons */
-    .btn{display:inline-block;padding:12px 18px;border-radius:999px;background:linear-gradient(90deg,var(--brand),var(--accent));color:#041316;font-weight:700;letter-spacing:.3px;box-shadow:0 10px 24px -10px var(--ring);transition:.25s}
-    .btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 16px 36px -12px var(--ring)}
-    .btn-outline{background:transparent;color:var(--text);border:2px solid var(--brand);box-shadow:none}
+    .btn{
+      display:inline-block;padding:12px 18px;border-radius:999px;
+      background:linear-gradient(90deg,var(--brand),#00d978);
+      color:#06150e;font-weight:700;letter-spacing:.3px;
+      box-shadow:0 12px 28px -12px var(--ring);
+      transition:.25s
+    }
+    .btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 18px 40px -16px var(--ring)}
+    .btn-outline{
+      background:transparent;color:var(--text);
+      border:2px solid var(--brand);box-shadow:none
+    }
 
-    /* ===== Banner Slider (NEW) ===== */
+    /* Banner Slider */
     .banner{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border-bottom:1px solid rgba(255,255,255,.06)}
-    .slider{position:relative;max-width:1120px;margin:0 auto;overflow:hidden;border-radius:20px}
+    .slider{position:relative;max-width:1120px;margin:0 auto;overflow:hidden;border-radius:22px}
     .slides{display:flex;transition:transform .6s ease}
     .slide{position:relative;min-width:100%;height:340px}
     .slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.78)}
@@ -59,37 +88,35 @@
     }
     .cap-text{max-width:760px}
     .cap-title{font-weight:700;font-size:20px;margin:0 0 4px}
-    .cap-sub{opacity:.9;margin:0}
-    .slider-btn{
-      position:absolute;top:50%;transform:translateY(-50%);background:rgba(15,23,42,.7);border:1px solid rgba(255,255,255,.2);
-      width:38px;height:38px;border-radius:999px;display:grid;place-items:center;color:#fff;cursor:pointer;user-select:none
-    }
-    .slider-btn:hover{background:rgba(15,23,42,.9)}
-    .prev{left:12px} .next{right:12px}
-    .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;gap:8px;justify-content:center}
-    .dot{width:8px;height:8px;border-radius:99px;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.6)}
+    .cap-sub{opacity:.92;margin:0}
+    .dots{position:absolute;left:0;right:0;bottom:12px;display:flex;gap:8px;justify-content:center}
+    .dot{width:8px;height:8px;border-radius:99px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7);cursor:pointer}
     .dot.active{background:#fff}
-    /* ===== End Banner Slider ===== */
 
     /* Hero */
     .hero{position:relative;overflow:hidden}
     .hero-wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:center;padding:48px 0 36px}
     .hero h1{font-size:44px;line-height:1.12;margin:8px 0 12px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.4)}
     .hero p{color:var(--muted);font-size:18px;margin:0 0 18px}
-    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 12px;font-size:13px;color:var(--accent);background:rgba(255,255,255,.04)}
-    .hero-art{background:linear-gradient(140deg, rgba(34,211,238,.18), rgba(20,184,166,.18));border:1px solid rgba(255,255,255,.06);height:320px;border-radius:22px;box-shadow:0 14px 40px rgba(0,0,0,.35);display:grid;place-items:center}
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 12px;font-size:13px;color:#071b0f;background:rgba(0,191,99,.22)}
+
+    .hero-art{background:linear-gradient(140deg, rgba(0,191,99,.18), rgba(0,191,99,.10));border:1px solid rgba(255,255,255,.06);height:320px;border-radius:22px;box-shadow:0 14px 40px rgba(0,0,0,.35);display:grid;place-items:center}
     .hero-art-inner{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:88%;height:70%}
     .hero-art-inner div{border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
 
     /* KPI & Cards */
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
-    .kpi{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;box-shadow:0 4px 10px rgba(0,0,0,.2);text-align:center}
+    .kpi{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;
+      box-shadow:0 4px 10px rgba(0,0,0,.2);text-align:center
+    }
     .kpi b{font-size:22px;display:block;margin-top:4px;color:#fff}
     .kpi .label{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px}
 
     .grid{display:grid;gap:18px}
     .cards{grid-template-columns:repeat(3,1fr)}
-    .card{background:var(--panel-2);border:1px solid rgba(255,255,255,.08);padding:20px;border-radius:18px;box-shadow:0 8px 18px rgba(0,0,0,.28);transition:.3s}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);padding:20px;border-radius:18px;box-shadow:0 8px 18px rgba(0,0,0,.28);transition:.3s}
     .card:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.36)}
     .card h3{margin:0 0 6px;font-size:18px;color:var(--accent)}
     .muted{color:var(--muted)}
@@ -100,7 +127,10 @@
     /* Calculator & Form */
     .calculator{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     label{display:block;margin:8px 0 6px}
-    input, select, textarea{width:100%;background:#0b1222;color:var(--text);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;outline:none;transition:.2s}
+    input, select, textarea{
+      width:100%;background:#0b1222;color:var(--text);
+      border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;outline:none;transition:.2s
+    }
     input:focus, select:focus, textarea:focus{border-color:var(--brand);box-shadow:0 0 0 4px var(--ring)}
     .result{background:#0b1222;border:1px dashed rgba(255,255,255,.22);border-radius:14px;padding:14px;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)}
 
@@ -113,18 +143,27 @@
     .quote b{display:block;margin-top:6px;color:#fff}
 
     /* FAQ */
-    .faq details{background:var(--panel-2);border:1px solid rgba(255,255,255,.1);margin:10px 0;border-radius:14px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+    .faq details{background:var(--panel);border:1px solid rgba(255,255,255,.1);margin:10px 0;border-radius:14px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
     .faq summary{cursor:pointer;font-weight:600;color:var(--accent)}
 
     /* Footer */
-    .footer{padding:34px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.1);text-align:center;font-size:14px;background:linear-gradient(180deg,rgba(17,24,39,.95),rgba(15,23,42,1))}
+    .footer{
+      padding:34px 0;color:var(--muted);
+      border-top:1px solid rgba(255,255,255,.1);
+      text-align:center;font-size:14px;
+      background:linear-gradient(180deg,rgba(12,18,36,.95),rgba(12,18,36,1))
+    }
     .footer .links{margin-top:8px}
     .footer a{color:var(--accent)}
-    .footer a:hover{color:var(--brand)}
+    .footer a:hover{opacity:.85}
 
     /* Floating WhatsApp */
-    .floating-wa{position:fixed;right:16px;bottom:16px;background:#25D366;color:#fff;border-radius:999px;padding:14px;display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:50;transition:.3s}
-    .floating-wa:hover{transform:scale(1.08)}
+    .floating-wa{
+      position:fixed;right:16px;bottom:16px;background:#25D366;color:#fff;border-radius:999px;padding:14px;
+      display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;
+      box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:50;transition:.3s
+    }
+    .floating-wa:hover{transform:scale(1.06)}
     .floating-wa svg{width:28px;height:28px;display:block}
 
     @media (max-width: 980px){
@@ -132,7 +171,7 @@
       .calculator{grid-template-columns:1fr}
       .cards,.steps,.kpis,.testimonials{grid-template-columns:1fr}
       .nav .hide-sm{display:none}
-      .logo img{max-height:34px}
+      .logo img{height:34px;max-height:34px}
       .slide{height:260px}
     }
   </style>
@@ -145,7 +184,7 @@
     "name": "Lending Circle Limited",
     "areaServed": "Jamaica",
     "url": "https://your-domain.example/",
-    "logo.png": "/logo.png",
+    "logo": "/logo.png",
     "telephone": "+876 491-4462",
     "currenciesAccepted": "JMD",
     "openingHours": "Mo-Fr 09:00-17:00",
@@ -157,8 +196,9 @@
   <!-- Header -->
   <header>
     <div class="container nav">
-      <div class="logo.png">
-        <img src="/logo.png" alt="Lending Circle Limited logo">
+      <div class="logo">
+        <!-- Hard-capped logo size -->
+        <img src="/logo.png" alt="Lending Circle Limited logo" height="40" style="height:40px;max-height:40px;width:auto;display:block;">
         Lending Circle Limited
       </div>
       <nav class="hide-sm" aria-label="Primary">
@@ -171,13 +211,12 @@
     </div>
   </header>
 
-  <!-- ===== Banner Slider (NEW) ===== -->
+  <!-- Banner Slider (dots only; images are placeholders you can replace) -->
   <section class="banner" aria-label="Highlights">
-    <div class="slider" id="slider">
+    <div class="slider" id="slider" tabindex="0">
       <div class="slides" id="slides">
-        <!-- Slide 1: Fast approvals -->
+        <!-- TIP: upload /banner-1.jpg ... /banner-4.jpg to your repo root and replace src below -->
         <article class="slide" role="group" aria-roledescription="slide" aria-label="Fast approvals">
-          <!-- Replace with /banner-1.jpg if you upload your own -->
           <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop" alt="Happy customer celebrating loan approval">
           <div class="caption">
             <div class="cap-text">
@@ -188,7 +227,6 @@
           </div>
         </article>
 
-        <!-- Slide 2: Transparent pricing -->
         <article class="slide" role="group" aria-roledescription="slide" aria-label="Transparent pricing">
           <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1600&auto=format&fit=crop" alt="Transparent pricing shown clearly on paper">
           <div class="caption">
@@ -200,7 +238,6 @@
           </div>
         </article>
 
-        <!-- Slide 3: Flexible terms -->
         <article class="slide" role="group" aria-roledescription="slide" aria-label="Flexible terms">
           <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1600&auto=format&fit=crop" alt="Calendar and notebook representing flexible scheduling">
           <div class="caption">
@@ -212,7 +249,6 @@
           </div>
         </article>
 
-        <!-- Slide 4: Support -->
         <article class="slide" role="group" aria-roledescription="slide" aria-label="Local support">
           <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop" alt="Friendly support team assisting a customer">
           <div class="caption">
@@ -224,14 +260,10 @@
           </div>
         </article>
       </div>
-
-      <!-- Controls -->
-      <button class="slider-btn prev" id="prev" aria-label="Previous slide">‹</button>
-      <button class="slider-btn next" id="next" aria-label="Next slide">›</button>
       <div class="dots" id="dots" aria-hidden="true"></div>
     </div>
   </section>
-  <!-- ===== End Banner Slider ===== -->
+  <!-- End Banner Slider -->
 
   <main>
     <!-- HERO -->
@@ -410,15 +442,13 @@
   <a class="floating-wa" href="https://wa.me/18764914462?text=Hi%20Lending%20Circle%2C%20I%27m%20ready%20to%20apply." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M19.11 17.59c-.27-.14-1.59-.79-1.84-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.16-1.35-.8-.7-1.34-1.56-1.5-1.83-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.46-.16 0-.34-.02-.52-.02s-.48.07-.73.34c-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.83.14.18 1.93 2.94 4.68 4.12.65.28 1.16.45 1.55.57.65.21 1.23.18 1.69.11.52-.08 1.59-.65 1.81-1.27.22-.62.22-1.15.16-1.27-.07-.12-.25-.2-.52-.34z" fill="#FFF"/>
-      <path d="M26.7 5.3A12.5 12.5 0 0 0 16 1.5C8.99 1.5 3.3 7.19 3.3 14.2c0 2.27.62 4.48 1.8 6.4L3 28.7l8.29-2.05c1.84 1 3.92 1.53 6.03 1.53 7.01 0 12.7-5.69 12.7-12.7 0-3.39-1.32-6.58-3.32-8.98zM17.32 26.5c-1.9 0-3.77-.5-5.4-1.42l-.39-.22-4.91 1.21 1.31-4.78-.25-.39a10.87 10.87 0 0 1-1.67-5.7C6.01 8.8 10.5 4.3 16 4.3c2.88 0 5.58 1.12  7.61 3.15a10.71 10.71 0 0 1 3.15 7.6c0 5.49-4.49 9.99-9.99 9.99z" fill="#FFF"/>
+      <path d="M26.7 5.3A12.5 12.5 0 0 0 16 1.5C8.99 1.5 3.3 7.19 3.3 14.2c0 2.27.62 4.48 1.8 6.4L3 28.7l8.29-2.05c1.84 1 3.92 1.53 6.03 1.53 7.01 0 12.7-5.69 12.7-12.7 0-3.39-1.32-6.58-3.32-8.98zM17.32 26.5c-1.9 0-3.77-.5-5.4-1.42l-.39-.22-4.91 1.21 1.31-4.78-.25-.39a10.87 10.87 0 0 1-1.67-5.7C6.01 8.8 10.5 4.3 16 4.3c2.88 0 5.58 1.12, 7.61 3.15a10.71 10.71 0 0 1 3.15 7.6c0 5.49-4.49 9.99-9.99 9.99z" fill="#FFF"/>
     </svg>
   </a>
 
   <script>
-    // ===== Slider logic =====
+    // ===== Banner slider (dots only) =====
     const slides = document.getElementById('slides');
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
     const dotsWrap = document.getElementById('dots');
     const total = slides.children.length;
     let index = 0, timer;
@@ -431,24 +461,27 @@
     }
     function restart(){
       clearInterval(timer);
-      timer = setInterval(()=> go(index+1), 6000);
+      timer = setInterval(()=> go(index+1), 5500);
     }
-    // dots
+
+    // Build dots
     for(let i=0;i<total;i++){
       const dot = document.createElement('div');
       dot.className = 'dot' + (i===0?' active':'');
       dot.addEventListener('click', ()=>go(i));
       dotsWrap.appendChild(dot);
     }
-    prev.addEventListener('click', ()=>go(index-1));
-    next.addEventListener('click', ()=>go(index+1));
-    // keyboard
-    document.getElementById('slider').addEventListener('keydown', (e)=>{
-      if(e.key==='ArrowLeft') go(index-1);
-      if(e.key==='ArrowRight') go(index+1);
-    });
+    // Touch swipe support
+    let startX = null;
+    slides.addEventListener('touchstart', (e)=> startX = e.touches[0].clientX, {passive:true});
+    slides.addEventListener('touchmove', (e)=> {
+      if(startX===null) return;
+      const dx = e.touches[0].clientX - startX;
+      if(Math.abs(dx) > 60){ go(index + (dx<0?1:-1)); startX = null; }
+    }, {passive:true});
+
     restart();
-    // ===== End slider logic =====
+    // ===== End slider =====
 
     // Util: currency format JMD
     const fmt = (n) => new Intl.NumberFormat('en-JM', { style: 'currency', currency: 'JMD', maximumFractionDigits: 0 }).format(n);
