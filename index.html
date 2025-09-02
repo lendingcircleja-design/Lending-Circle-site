@@ -1,205 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lending Circle Limited — Financial Solutions</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
-    :root{
-      --bg:#0a0f1c;         /* deep ink */
-      --panel:#0c1426;      /* elevated card surface */
-      --text:#eaf1f7;
-      --muted:#9fb0c2;
-      --brand:#00bf63;      /* company green */
-      --ring:rgba(0,191,99,.35);
-    }
+    :root{--bg:#0a0f1c;--panel:#0c1426;--text:#eaf1f7;--muted:#9fb0c2;--brand:#00bf63;--ring:rgba(0,191,99,.35)}
+    *{box-sizing:border-box;scroll-behavior:smooth}
+    html,body{margin:0;padding:0;color:var(--text);font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;background:radial-gradient(1200px 600px at 10% -10%, rgba(0,191,99,.10), transparent 60%),radial-gradient(900px 480px at 100% 0%, rgba(0,191,99,.06), transparent 60%),linear-gradient(180deg, #0a0f1c 0%, #0b1220 60%, #0a0f1c 100%)}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:repeating-linear-gradient(45deg, rgba(255,255,255,.02) 0 2px, transparent 2px 6px);mix-blend-mode:soft-light;opacity:.35}
+    a{color:var(--brand);text-decoration:none}
+    .container{max-width:1400px;margin:0 auto;padding:0 24px}
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    html,body{
-      margin:0;padding:0;color:var(--text);
-      font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(0,191,99,.10), transparent 60%),
-        radial-gradient(900px 480px at 100% 0%, rgba(0,191,99,.06), transparent 60%),
-        linear-gradient(180deg, #0a0f1c 0%, #0b1220 60%, #0a0f1c 100%);
-      line-height:1.6;
-    }
-    /* subtle grain so the background isn't flat */
-    body::before{
-      content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
-      background:repeating-linear-gradient(45deg, rgba(255,255,255,.02) 0 2px, transparent 2px 6px);
-      mix-blend-mode:soft-light; opacity:.35;
-    }
-
-    a{color:var(--brand);text-decoration:none;transition:.2s}
-    a:hover{opacity:.9}
-    .container{max-width:1400px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-
-    /* ===== HEADER ===== */
-    header{
-      position:sticky;top:0;z-index:50;background:rgba(8,12,24,.92);
-      backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)
-    }
+    header{position:sticky;top:0;z-index:50;background:rgba(8,12,24,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0;position:relative}
-    .left-group{display:flex;align-items:center;gap:12px;min-width:0}
     .brand{display:flex;align-items:center;gap:10px;font-weight:700;white-space:nowrap}
     .brand img{height:38px;width:auto;display:inline-block;vertical-align:middle}
     .links{display:flex;align-items:center;gap:18px}
     .links a{color:var(--text);opacity:.95}
-    .apply-link{color:var(--brand);font-weight:700} /* header Apply Now: company green */
+    .apply-link{color:var(--brand);font-weight:700}
 
-    /* Modern Hamburger (animated to X) */
-    .hamburger{
-      background:transparent;border:0;color:#fff;padding:8px;cursor:pointer;z-index:100;
-      display:none; /* shown on mobile via media query */
-    }
-    .hamburger svg{width:28px;height:28px;display:block}
-    .hamburger rect{transition:transform .25s ease, opacity .2s ease; transform-origin:50% 50%}
+    .hamburger{display:none;background:transparent;border:0;color:#fff;padding:8px;cursor:pointer;z-index:100}
+    .hamburger svg{width:28px;height:28px;fill:var(--brand)}
+    .hamburger rect{transition:transform .25s ease, opacity .2s ease;transform-origin:50% 50%}
     .nav.open .hamburger #bar1{transform:translateY(25px) rotate(45deg)}
     .nav.open .hamburger #bar2{opacity:0}
     .nav.open .hamburger #bar3{transform:translateY(-25px) rotate(-45deg)}
-
-    /* Mobile menu panel */
-    .mobile-menu{
-      display:none;position:absolute;top:56px;right:16px; /* right-aligned for mobile */
-      background:var(--panel);border:1px solid rgba(255,255,255,.08);
-      border-radius:12px;box-shadow:0 14px 28px rgba(0,0,0,.35);padding:10px;min-width:220px
-    }
+    .mobile-menu{display:none;position:absolute;right:20px;top:56px;background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:0 14px 28px rgba(0,0,0,.35);padding:10px;min-width:200px}
     .mobile-menu a{display:block;padding:10px 12px;color:var(--text);border-radius:8px}
     .mobile-menu a:hover{background:rgba(255,255,255,.06)}
     .nav.open .mobile-menu{display:block}
 
-    /* ===== BANNER / SLIDER ===== */
     .banner{position:relative;border-bottom:1px solid rgba(255,255,255,.06)}
     .slider{position:relative;max-width:1400px;margin:0 auto;overflow:hidden}
     .slides{display:flex;transition:transform .6s ease}
     .slide{min-width:100%;height:560px;position:relative}
     .slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.8)}
-    .caption{
-      position:absolute;left:0;right:0;bottom:0;padding:20px;
-      background:linear-gradient(180deg,transparent,rgba(0,0,0,.65));color:#fff;
-      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
-    }
+    .caption{position:absolute;left:0;right:0;bottom:0;padding:20px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.65));color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    @media(max-width:540px){.caption{justify-content:center;text-align:center}}
     .cap-title{margin:0;font-weight:700}
+
     .dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:4px}
     .dot{width:10px;height:2px;border-radius:1px;background:rgba(255,255,255,.26);border:1px solid rgba(255,255,255,.18);cursor:pointer;transition:opacity .2s,transform .2s}
     .dot.active{background:#fff;border-color:#fff;box-shadow:0 1px 6px rgba(0,0,0,.25)}
 
-    /* ===== TYPOGRAPHY ===== */
-    h1{color:var(--brand);font-size:clamp(28px,4.2vw,46px);margin:20px 0 6px;text-align:center}
-    h2{color:var(--brand);font-size:clamp(20px,3vw,28px);margin:24px 0 8px;text-align:center}
+    h1{color:var(--brand);font-size:clamp(28px,4.2vw,44px);margin:20px 0 6px;text-align:center}
+    h2{color:var(--brand);font-size:clamp(20px,3vw,26px);margin:24px 0 8px;text-align:center}
 
-    /* ===== BUTTONS (brand green) ===== */
-    .btn{
-      display:inline-block;padding:12px 18px;border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(180deg,#12e184,#00bf63);
-      color:#04130a;font-weight:700;letter-spacing:.2px;
-      box-shadow:0 10px 24px -12px rgba(0,191,99,.45);
-      transition:transform .15s ease, box-shadow .2s ease, opacity .2s
-    }
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,#12e184,#00bf63);color:#04130a;font-weight:700;letter-spacing:.2px;box-shadow:0 10px 24px -12px rgba(0,191,99,.45);transition:transform .15s ease, box-shadow .2s ease, opacity .2s}
     .btn:hover{transform:translateY(-2px);box-shadow:0 18px 36px -14px rgba(0,191,99,.5)}
     .btn:active{transform:translateY(0)}
-    .btn-ghost{
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.16);
-      color:var(--text)
-    }
+    .btn-ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:var(--text)}
 
-    /* ===== CARDS ===== */
-    .card{
-      background:var(--panel);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;
-      box-shadow:0 10px 28px rgba(0,0,0,.28);
-    }
+    /* Cards */
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 10px 28px rgba(0,0,0,.28)}
 
-    /* ===== FORMS (modern) ===== */
-    label{display:block;margin:8px 0 6px}
-    input,select,textarea{
-      width:100%;background:linear-gradient(180deg,#0f1a2e,#0b1222);
-      color:#eef5fb;border:1px solid rgba(255,255,255,.14);
-      border-radius:14px;padding:14px 14px;outline:none;
-      transition:border-color .2s, box-shadow .2s, transform .06s;
-      font-size:clamp(14px,1.8vw,16px);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 1px 2px rgba(0,0,0,.35)
-    }
-    input::placeholder,textarea::placeholder{color:#93a4b5;opacity:.9}
-    input:focus,select:focus,textarea:focus{
-      border-color:var(--brand);
-      box-shadow:0 0 0 4px rgba(0,191,99,.25), inset 0 1px 0 rgba(255,255,255,.06);
-      transform:translateY(-1px)
-    }
+    /* Animated result */
+    .calculator .result{background:var(--panel);border:1px dashed rgba(255,255,255,.22);border-radius:14px;padding:14px;box-shadow:inset 0 2px 4px rgba(0,0,0,.2);opacity:1}
+    .calculator .result.flash{animation:flashIn .38s ease both}
+    @keyframes flashIn{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
 
-    /* ===== CALCULATOR ===== */
     .calculator{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1200px;margin:0 auto}
-    .result{border:1px dashed rgba(255,255,255,.22);border-radius:14px;padding:16px;box-shadow:inset 0 2px 4px rgba(0,0,0,.2);background:#0b1222}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .calculator label{display:block;margin:8px 0 6px}
+    .calculator input,.calculator select{width:100%;background:linear-gradient(180deg,#0f1a2e,#0b1222);color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 14px;outline:none;transition:border-color .2s, box-shadow .2s, transform .06s;font-size:clamp(14px,1.8vw,16px);box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 1px 2px rgba(0,0,0,.35)}
+    .calculator input::placeholder{color:#93a4b5;opacity:.9}
+    .calculator input:focus,.calculator select:focus{border-color:var(--brand);box-shadow:0 0 0 4px var(--ring), inset 0 1px 0 rgba(255,255,255,.05);transform:translateY(-1px)}
+    .calculator .result{background:var(--panel);border:1px dashed rgba(255,255,255,.22);border-radius:14px;padding:14px;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)}
 
-    /* ===== FAQ ===== */
-    .faq details{background:#111827;border:1px solid rgba(255,255,255,.08);margin:10px auto;max-width:880px;border-radius:12px;padding:12px 14px;box-shadow:0 4px 12px rgba(0,0,0,.22)}
-    .faq summary{cursor:pointer;font-weight:700;color:var(--brand)}
-    .faq p{color:#c9d4df;margin:8px 2px 2px}
-
-    /* ===== FOOTER ===== */
-    .footer{text-align:center;margin-top:42px;font-size:14px;color:var(--muted);padding:24px;border-top:1px solid rgba(255,255,255,.06)}
-    .footer a{color:var(--brand)}
-
-    /* Floating WhatsApp */
-    .floating-wa{position:fixed;right:16px;bottom:16px;background:#25D366;border-radius:999px;width:56px;height:56px;display:grid;place-items:center;box-shadow:0 10px 28px rgba(0,0,0,.35);z-index:60}
-    .floating-wa img{width:32px;height:32px;display:block}
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 960px){
-      .links{display:none}
-      .hamburger{display:inline-grid; margin-left:auto; order:1;} /* move to top-right on mobile */
-      .slide{height:440px}
-      .calculator{grid-template-columns:1fr}
-      /* Center banner content on mobile */
-      .caption{justify-content:center; text-align:center}
-    }
-    @media (max-width: 540px){
-      .slide{height:360px}
-      .container{padding:0 14px}
-      h1{font-size:26px}
-    }
+    @media(max-width:960px){.links{display:none}.hamburger{display:inline-grid;order:1}.slide{height:400px}.calculator{grid-template-columns:1fr}}
+    @media(max-width:540px){.slide{height:340px}.cap-title{font-size:16px}.container{padding:0 14px}}
   </style>
 </head>
 <body>
-  <!-- ===== HEADER ===== -->
   <header>
     <div class="container nav" id="nav">
-      <!-- Hamburger first in DOM; CSS moves it to the right on mobile -->
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" title="Menu">
-        <!-- Modern rounded hamburger; bottom bar shorter -->
+      <a href="#home" class="brand">
+        <img src="/logo.png" alt="Lending Circle Limited logo" />
+        <span>Lending Circle Limited</span>
+      </a>
+      <nav class="links" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact">Contact</a>
+        <a href="#apply" class="apply-link">Apply Now</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" width="28" height="28" fill="currentColor" aria-hidden="true">
           <rect id="bar1" y="10" width="80" height="10" rx="5"></rect>
           <rect id="bar2" y="35" width="90" height="10" rx="5"></rect>
           <rect id="bar3" y="60" width="60" height="10" rx="5"></rect>
         </svg>
       </button>
-
-      <a href="#home" class="brand">
-        <img src="/logo.png" alt="Lending Circle Limited logo" />
-        <span>Lending Circle Limited</span>
-      </a>
-
-      <nav class="links" aria-label="Primary">
-        <a href="#home">Home</a>
-        <a href="#calculator">Calculator</a>
-        <a href="#apply">Apply</a>
-        <a href="#faq">FAQs</a>
-        <a href="#contact">Contact</a>
-        <a href="#apply" class="apply-link">Apply Now</a>
-      </nav>
-
       <div class="mobile-menu" id="mobileMenu" role="menu" aria-label="Mobile Navigation">
         <a href="#home">Home</a>
         <a href="#calculator">Calculator</a>
-        <a href="#apply">Apply</a>
         <a href="#faq">FAQs</a>
         <a href="#contact">Contact</a>
         <a href="#apply" class="apply-link">Apply Now</a>
@@ -207,260 +103,164 @@
     </div>
   </header>
 
-  <!-- ===== BANNER / SLIDER ===== -->
   <section class="banner" id="home">
     <div class="slider" tabindex="0">
       <div class="slides" id="slides">
-        <div class="slide">
-          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1920&auto=format&fit=crop" alt="Fast approvals" />
-          <div class="caption container">
-            <h3 class="cap-title">Fast approvals — often the same day</h3>
-            <a class="btn" href="#apply">Apply now</a>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1920&auto=format&fit=crop" alt="Transparent pricing" />
-          <div class="caption container">
-            <h3 class="cap-title">Transparent pricing — no surprises</h3>
-            <a class="btn" href="#calculator">Estimate repayments</a>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1920&auto=format&fit=crop" alt="Flexible terms" />
-          <div class="caption container">
-            <h3 class="cap-title">Flexible terms to fit your cash flow</h3>
-            <a class="btn" href="#how-it-works">How it works</a>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1920&auto=format&fit=crop" alt="Local support" />
-          <div class="caption container">
-            <h3 class="cap-title">Local support when you need it</h3>
-            <a class="btn" href="https://wa.me/18764914462" target="_blank" rel="noopener">Chat on WhatsApp</a>
-          </div>
-        </div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop" alt="Fast approvals"><div class="caption container"><h3 class="cap-title">Fast approvals — often the same day</h3><a class="btn" href="#apply">Apply now</a></div></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1600&auto=format&fit=crop" alt="Transparent pricing"><div class="caption container"><h3 class="cap-title">Transparent pricing — no surprises</h3><a class="btn" href="#calculator">Estimate repayments</a></div></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1600&auto=format&fit=crop" alt="Flexible terms"><div class="caption container"><h3 class="cap-title">Flexible terms to fit your cash flow</h3><a class="btn" href="#how-it-works">How it works</a></div></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop" alt="Local support"><div class="caption container"><h3 class="cap-title">Local support when you need it</h3><a class="btn" href="https://wa.me/18764914462" target="_blank" rel="noopener">Chat on WhatsApp</a></div></div>
       </div>
       <div class="dots" id="dots" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- ===== INTRO ===== -->
-  <section class="container" style="padding:28px 0 10px">
-    <h1>Financial Solutions to Move You Forward</h1>
-    <p style="text-align:center;color:var(--muted);max-width:820px;margin:0 auto">
-      Apply in minutes. Get a quick decision. We show your full cost upfront so there are no surprises.
-    </p>
-  </section>
+  <main>
+    <section class="container" style="padding:28px 0 10px">
+      <h1>Financial Solutions to Move You Forward</h1>
+      <p style="text-align:center;color:var(--muted);max-width:760px">Apply in minutes. Get a quick decision. We show your full cost upfront so there are no surprises.</p>
+    </section>
 
-  <!-- ===== CALCULATOR ===== -->
-  <section id="calculator" class="container" style="padding:28px 0 10px">
-    <h2>Loan calculator</h2>
-    <div class="calculator">
-      <div class="card" style="padding:18px">
-        <label for="amount">Loan amount (JMD)</label>
-        <input id="amount" inputmode="numeric" type="number" min="1000" step="500" placeholder="e.g. 50,000" />
-
-        <label for="weeks">Repayment period (weeks)</label>
-        <select id="weeks">
-          <option value="2">2 weeks (1 fortnight)</option>
-          <option value="4">4 weeks (2 fortnights)</option>
-          <option value="6">6 weeks (3 fortnights)</option>
-          <option value="8">8 weeks (4 fortnights)</option>
-        </select>
-
-        <label for="freq">Salary frequency</label>
-        <select id="freq">
-          <option value="fortnightly">Salaried fortnightly</option>
-          <option value="monthly">Salaried monthly</option>
-        </select>
-
-        <button class="btn" style="margin-top:12px" onclick="calc()">Calculate</button>
-      </div>
-
-      <div class="result card" id="result" aria-live="polite" style="padding:18px">
-        <b>Breakdown</b>
-        <div class="muted">Enter amount & select weeks, then press Calculate.</div>
-      </div>
-    </div>
-
-    <p class="muted" style="text-align:center;margin-top:10px">
-      Pricing model: 35% for the first fortnight, +5% for each additional fortnight (max 4).
-      The <strong>processing fee (JMD 1,950)</strong> is paid <strong>upfront</strong> on multi-payment plans (monthly: terms &gt; 4 weeks; fortnightly: terms &gt; 2 weeks). It is <strong>not</strong> included in “Payment each period”.
-    </p>
-  </section>
-
-  <!-- ===== APPLY FORM (Netlify-ready, modern) ===== -->
-  <section id="apply" class="container" style="padding:28px 0 10px">
-    <h2>Start your application</h2>
-    <p class="muted" style="text-align:center;margin-top:0">We’ll contact you shortly after you submit.</p>
-
-    <form name="loan-application" method="POST" data-netlify="true" netlify-honeypot="bot-field"
-          id="loanForm" class="card" style="max-width:980px;margin:0 auto;padding:24px">
-      <input type="hidden" name="form-name" value="loan-application" />
-      <p style="display:none"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
-
-      <div class="form-grid">
-        <div>
-          <label for="fullname">Full name</label>
-          <input id="fullname" name="fullname" required placeholder="Your full name" autocomplete="name" />
-        </div>
-        <div>
-          <label for="phone">Phone (WhatsApp preferred)</label>
-          <input id="phone" name="phone" required placeholder="876-491-4462" autocomplete="tel" />
-        </div>
-        <div>
-          <label for="email">Email (optional)</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
-        </div>
-        <div>
-          <label for="requested_amount">Amount requested (JMD)</label>
-          <input id="requested_amount" name="requested_amount" type="number" min="1000" step="500" required />
-        </div>
-        <div>
-          <label for="salary_freq">Salary frequency</label>
-          <select id="salary_freq" name="salary_freq">
-            <option value="fortnightly">Fortnightly</option>
-            <option value="monthly">Monthly</option>
+    <section id="calculator" class="container" style="padding:28px 0">
+      <h2>Loan calculator</h2>
+      <div class="calculator">
+        <div class="card" style="padding:18px">
+          <label for="amount">Loan amount (JMD)</label>
+          <input id="amount" type="number" min="1000" step="500" placeholder="e.g. 50,000">
+          <label for="weeks">Repayment period (weeks)</label>
+          <select id="weeks">
+            <option value="2">2 weeks (1 fortnight)</option>
+            <option value="4">4 weeks (2 fortnights)</option>
+            <option value="6">6 weeks (3 fortnights)</option>
+            <option value="8">8 weeks (4 fortnights)</option>
           </select>
+          <label for="payfreq">Salary frequency</label>
+          <select id="payfreq">
+            <option value="fortnightly">Salaried fortnightly</option>
+            <option value="monthly">Salaried monthly</option>
+          </select>
+          <button class="btn" style="margin-top:12px" onclick="calc()">Calculate</button>
         </div>
-        <div>
-          <label for="purpose">Purpose</label>
-          <textarea id="purpose" name="purpose" rows="5" placeholder="Briefly tell us how you’ll use the funds"></textarea>
+        <div class="result card" id="result" aria-live="polite">
+          <b>Breakdown</b>
+          <div style="color:#a7b8c9">Enter amount & select weeks, then press Calculate.</div>
         </div>
       </div>
+    </section>
 
-      <label style="display:flex;gap:8px;align-items:center;margin-top:8px;color:var(--muted)">
-        <input type="checkbox" name="consent" required /> I agree to be contacted about my application and understand that approval is subject to assessment.
-      </label>
+    <!-- ===== APPLY FORM (Netlify Forms -> email notifications) ===== -->
+    <section id="apply" class="container" style="padding:28px 0">
+      <h2>Start your application</h2>
+      <p class="muted" style="text-align:center;margin:0 auto 10px;max-width:720px">We’ll contact you shortly after you submit. Submissions are securely delivered to our team via email.</p>
 
-      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:14px">
-        <button class="btn" type="submit">Submit application</button>
-        <a class="btn-ghost" href="https://wa.me/18764914462?text=Hi%20Lending%20Circle%2C%20I%27d%20like%20to%20apply%20for%20a%20loan." target="_blank" rel="noopener" style="padding:12px 18px;border-radius:12px">Chat on WhatsApp</a>
-        <a class="btn-ghost" href="tel:+18764914462" style="padding:12px 18px;border-radius:12px">Call us</a>
+      <form name="loan-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="card" style="max-width:980px;margin:0 auto;padding:24px">
+        <input type="hidden" name="form-name" value="loan-application" />
+        <p style="display:none"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
+
+        <div class="form-grid">
+          <div>
+            <label for="fullname">Full name</label>
+            <input id="fullname" name="fullname" required placeholder="Your full name" autocomplete="name" />
+          </div>
+          <div>
+            <label for="phone">Phone (WhatsApp preferred)</label>
+            <input id="phone" name="phone" required placeholder="876-491-4462" autocomplete="tel" />
+          </div>
+          <div>
+            <label for="email">Email (optional)</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
+          </div>
+          <div>
+            <label for="requested_amount">Amount requested (JMD)</label>
+            <input id="requested_amount" name="requested_amount" type="number" min="1000" step="500" required />
+          </div>
+          <div>
+            <label for="salary_freq">Salary frequency</label>
+            <select id="salary_freq" name="salary_freq">
+              <option value="fortnightly">Fortnightly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+          <div>
+            <label for="purpose">Purpose</label>
+            <textarea id="purpose" name="purpose" rows="5" placeholder="Briefly tell us how you’ll use the funds"></textarea>
+          </div>
+        </div>
+
+        <label style="display:flex;gap:8px;align-items:center;margin-top:8px;color:var(--muted)">
+          <input type="checkbox" name="consent" required /> I agree to be contacted about my application and understand that approval is subject to assessment.
+        </label>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:14px">
+          <button class="btn" type="submit">Submit application</button>
+          <a class="btn-ghost" href="https://wa.me/18764914462?text=Hi%20Lending%20Circle%2C%20I%27d%20like%20to%20apply%20for%20a%20loan." target="_blank" rel="noopener" style="padding:12px 18px;border-radius:12px">Chat on WhatsApp</a>
+          <a class="btn-ghost" href="tel:+18764914462" style="padding:12px 18px;border-radius:12px">Call us</a>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section id="testimonials" class="container" style="padding:28px 0">
+      <h2>What customers say</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:1100px;margin:0 auto">
+        <div class="card" style="padding:18px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <img src="https://i.pravatar.cc/60?img=12" alt="Customer" style="width:44px;height:44px;border-radius:999px;object-fit:cover"/>
+            <div><b>Shanice R.</b><div style="color:var(--muted);font-size:13px">Kingston</div></div>
+          </div>
+          <div style="color:#ffd166">★★★★★</div>
+          <p style="margin:8px 0 0;color:#dbe6f1">“Got approved the same day. They explained everything clearly—no surprises.”</p>
+        </div>
+        <div class="card" style="padding:18px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <img src="https://i.pravatar.cc/60?img=36" alt="Customer" style="width:44px;height:44px;border-radius:999px;object-fit:cover"/>
+            <div><b>Andre P.</b><div style="color:var(--muted);font-size:13px">Montego Bay</div></div>
+          </div>
+          <div style="color:#ffd166">★★★★★</div>
+          <p style="margin:8px 0 0;color:#dbe6f1">“The calculator made it easy to plan. Payments matched my salary dates perfectly.”</p>
+        </div>
+        <div class="card" style="padding:18px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <img src="https://i.pravatar.cc/60?img=5" alt="Customer" style="width:44px;height:44px;border-radius:999px;object-fit:cover"/>
+            <div><b>Latoya M.</b><div style="color:var(--muted);font-size:13px">Spanish Town</div></div>
+          </div>
+          <div style="color:#ffd166">★★★★★</div>
+          <p style="margin:8px 0 0;color:#dbe6f1">“Friendly team and clear pricing. I’d definitely recommend.”</p>
+        </div>
       </div>
-
-      <div id="formMsg" class="muted" style="margin-top:8px;text-align:center" aria-live="polite"></div>
-    </form>
-  </section>
-
-  <!-- ===== FAQ ===== -->
-  <section id="faq" class="container" style="padding:28px 0 10px">
-    <h2>FAQs</h2>
-    <div class="faq">
-      <details><summary>How fast can I get approved?</summary><p>Often the same day. If we have everything we need to verify your details, we move quickly. If anything is missing, we’ll let you know immediately so nothing slows you down.</p></details>
-      <details><summary>What will my payments look like?</summary><p>We’ll give you a simple schedule up front based on your chosen term. No jargon—just clear dates and amounts so you can plan easily.</p></details>
-      <details><summary>What documents do I need?</summary><p>Please have your last three payslips, proof of address, a valid ID &amp; TRN, and a recent bank statement for your payroll account. If something’s missing, talk to us—we’ll help you sort it out.</p></details>
-      <details><summary>Are there hidden fees?</summary><p>No. You’ll always see the full cost before you commit. A small processing fee applies only to multi-payment plans; we’ll flag it clearly when it’s relevant.</p></details>
-      <details><summary>Can I repay early?</summary><p>Yes. If you want to settle before the end of your term, just let us know. We’ll give you the early-settlement amount—no penalty for paying off early.</p></details>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section id="contact" class="container" style="padding:28px 0 10px">
-    <h2>Contact</h2>
-    <p style="text-align:center">Email <a href="mailto:support@lendingcirclejm.com">support@lendingcirclejm.com</a> • Call/WhatsApp <a href="tel:+18764914462">+876 491-4462</a></p>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      © <span id="year"></span> Lending Circle Limited. All rights reserved.
-      • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a>
-    </div>
-  </footer>
-
-  <!-- Floating WhatsApp -->
-  <a class="floating-wa" href="https://wa.me/18764914462?text=Hi%20Lending%20Circle%2C%20I%27m%20ready%20to%20apply." target="_blank" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-  </a>
+    </section>
+  </main>
 
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile menu toggle (hamburger)
-    const nav = document.getElementById('nav');
-    const hamb = document.getElementById('hamburger');
-    const menu = document.getElementById('mobileMenu');
-    hamb.addEventListener('click', ()=>{
-      const isOpen = nav.classList.toggle('open');
-      hamb.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-    menu.addEventListener('click', (e)=>{ if(e.target.tagName==='A'){ nav.classList.remove('open'); hamb.setAttribute('aria-expanded','false'); } });
-
-    // Slider logic (sleek dash indicators)
-    const slidesEl = document.getElementById('slides');
-    const dotsWrap = document.getElementById('dots');
-    const total = slidesEl.children.length; let index = 0, timer;
-    function go(i){ index=(i+total)%total; slidesEl.style.transform=`translateX(-${index*100}%)`; [...dotsWrap.children].forEach((d,di)=>d.classList.toggle('active', di===index)); restart(); }
-    function restart(){ clearInterval(timer); timer=setInterval(()=> go(index+1), 6000); }
-    for(let i=0;i<total;i++){ const dot=document.createElement('div'); dot.className='dot'+(i===0?' active':''); dot.addEventListener('click', ()=>go(i)); dotsWrap.appendChild(dot); }
-    // touch swipe
-    let startX=null;
-    slidesEl.addEventListener('touchstart',(e)=> startX=e.touches[0].clientX,{passive:true});
-    slidesEl.addEventListener('touchmove',(e)=>{ if(startX===null) return; const dx=e.touches[0].clientX-startX; if(Math.abs(dx)>60){ go(index+(dx<0?1:-1)); startX=null; } },{passive:true});
-    restart();
-
-    // Currency format JMD
-    const fmt = (n) => new Intl.NumberFormat('en-JM', { style: 'currency', currency: 'JMD', maximumFractionDigits: 0 }).format(n);
-
-    // Calculator (processing fee upfront only; NOT included in per-period payment)
+    // Calculator fix: processing fee is upfront only, not in per-payment
     function calc(){
-      const amt = parseFloat(document.getElementById('amount').value || 0);
-      const weeks = parseInt(document.getElementById('weeks').value || 0, 10);
-      const freq = document.getElementById('freq').value; // 'fortnightly' | 'monthly'
-      const res = document.getElementById('result');
-
-      if(!amt || !weeks){
-        res.innerHTML = '<b>Breakdown</b><div class="muted">Please enter amount and weeks.</div>';
-        return;
-      }
-
-      const fortnights = Math.min(4, Math.max(1, Math.ceil(weeks/2)));
-      const rate = 0.35 + (fortnights - 1) * 0.05;     // 35% + 5% each extra fortnight
-      const interest = Math.round(amt * rate);
-      const totalRepay = amt + interest;                // amount actually repaid over schedule
-
-      // Processing fee rules (paid upfront only)
-      const feeThreshold = (freq === 'monthly') ? 4 : 2;
-      const fee = weeks > feeThreshold ? 1950 : 0;
-
-      // Number of payments based on salary frequency
-      const payments = (freq === 'monthly') ? Math.max(1, Math.ceil(weeks/4))
-                                            : Math.max(1, Math.ceil(weeks/2));
-
-      // Per-payment amount EXCLUDES fee (fee is upfront)
-      const perPayment = Math.round(totalRepay / payments);
-
-      res.innerHTML = `
-        <div class="form-grid" style="gap:10px">
-          <div><div class="muted">Principal</div><b>${fmt(amt)}</b></div>
-          <div><div class="muted">Repayment period</div><b>${weeks} weeks (${fortnights} fortnight${fortnights>1?'s':''})</b></div>
-          <div><div class="muted">Salary frequency</div><b>${freq[0].toUpperCase()+freq.slice(1)}</b></div>
-          <div><div class="muted">Interest rate</div><b>${Math.round(rate*100)}%</b></div>
-          <div><div class="muted">Interest amount</div><b>${fmt(interest)}</b></div>
-          <div><div class="muted">Total to repay</div><b>${fmt(totalRepay)}</b></div>
-          <div><div class="muted"># of payments</div><b>${payments}</b></div>
-          <div><div class="muted">Payment each period</div><b>${fmt(perPayment)}</b></div>
-          <div><div class="muted">Processing fee (upfront)</div><b>${fee?fmt(fee):'—'}</b></div>
-        </div>
-        <div class="muted" style="margin-top:8px;font-size:13px">
-          ${fee ? 'The processing fee is paid upfront and is not included in periodic payments.' : 'No processing fee based on the selected term.'}
-        </div>
-      `;
-    }
-
-    // Netlify form progressive enhancement (optional; native submission works too)
-    function encode(data){ return Object.keys(data).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k])).join('&'); }
-    const form = document.getElementById('loanForm');
-    if(form){
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        const formMsg = document.getElementById('formMsg');
-        const data = Object.fromEntries(new FormData(form).entries());
-        fetch('/', { method:'POST', headers:{ 'Content-Type':'application/x-www-form-urlencoded' }, body: encode({ 'form-name': form.getAttribute('name'), ...data })})
-        .then(() => { form.reset(); formMsg.textContent = "Thanks! We'll be in touch shortly."; formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--brand'); })
-        .catch((err) => { formMsg.textContent = 'Something went wrong. Please WhatsApp or call us.'; formMsg.style.color = '#ef4444'; console.error(err); });
-      });
+      const amt=parseFloat(document.getElementById('amount').value||0);
+      const weeks=parseInt(document.getElementById('weeks').value||0,10);
+      const freq=document.getElementById('payfreq').value;
+      const res=document.getElementById('result');
+      if(!amt||!weeks){res.innerHTML='<b>Breakdown</b><div style="color:#a7b8c9">Please enter amount and weeks.</div>';return;}
+      const fortnights=Math.min(4,Math.max(1,Math.ceil(weeks/2)));
+      const rate=0.35+(fortnights-1)*0.05;
+      const interest=Math.round(amt*rate);
+      const totalRepay=amt+interest;
+      const feeThreshold=(freq==='monthly')?4:2;
+      const fee=weeks>feeThreshold?1950:0;
+      const payments=(freq==='monthly')?Math.max(1,Math.ceil(weeks/4)):Math.max(1,Math.ceil(weeks/2));
+      const perPayment=Math.round(totalRepay/payments);
+      const fmt=(n)=>new Intl.NumberFormat('en-JM',{style:'currency',currency:'JMD',maximumFractionDigits:0}).format(n);
+      res.innerHTML=`<div class=\"form-grid\" style=\"gap:10px\">
+        <div><div class=\"muted\">Principal</div><b>${fmt(amt)}</b></div>
+        <div><div class=\"muted\">Repayment period</div><b>${weeks} weeks (${fortnights} fortnight${fortnights>1?'s':''})</b></div>
+        <div><div class=\"muted\">Salary frequency</div><b>${freq}</b></div>
+        <div><div class=\"muted\">Interest rate</div><b>${Math.round(rate*100)}%</b></div>
+        <div><div class=\"muted\">Interest amount</div><b>${fmt(interest)}</b></div>
+        <div><div class=\"muted\">Total to repay (excluding fee)</div><b>${fmt(totalRepay)}</b></div>
+        <div><div class=\"muted\"># of payments</div><b>${payments}</b></div>
+        <div><div class=\"muted\">Payment each period</div><b>${fmt(perPayment)}</b></div>
+        <div><div class=\"muted\">Processing fee (upfront)</div><b>${fee?fmt(fee):'—'}</b></div>
+      </div>`;
+      // trigger fade/slide animation
+      res.classList.remove('flash'); void res.offsetWidth; res.classList.add('flash');
     }
   </script>
 </body>
